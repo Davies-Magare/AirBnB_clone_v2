@@ -122,9 +122,10 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in HBNBCommand.classes:
             print("**class doesn't exist **")
             return
-        input_params = args.partition(" ")[2].split(' ')
+        input_params = args.split(' ')
         new_dict = {}
-        if len(input_params) > 0:
+        if len(input_params) > 1:
+            input_params = input_params[1:]
             for param in input_params:
                 key, value = param.split('=')
                 if '"' in value:
@@ -141,10 +142,12 @@ class HBNBCommand(cmd.Cmd):
                     new_dict[key] = value
                 else:
                         continue
-        new_instance = HBNBCommand.classes[class_name]()
-        obj_dict = BaseModel.to_dict(new_instance)
-        obj_dict.update(new_dict)
-        new_instance = HBNBCommand.classes[class_name](**obj_dict)
+            new_instance = HBNBCommand.classes[class_name]()
+            obj_dict = BaseModel.to_dict(new_instance)
+            obj_dict.update(new_dict)
+            new_instance = HBNBCommand.classes[class_name](**obj_dict)
+        else:
+            new_instance = HBNBCommand.classes[class_name]()
         storage.new(new_instance)
         storage.save()
         print(new_instance.id)
