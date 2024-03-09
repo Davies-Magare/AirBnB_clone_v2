@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.schema import MetaData
 from models.state import State
 from models.city import City
+from models.user import User
 import os
 
 class DBStorage:
@@ -36,7 +37,7 @@ class DBStorage:
                 key = "{}.{}".format(result.__class__.__name__, result.id)
                 obj_dict[key] = result
         else:
-            tables = [City, State]
+            tables = [City, State, User]
             for table in tables:
                 results = self.__session.query(table).all()
                 for result in results:
@@ -66,6 +67,7 @@ class DBStorage:
         from models.city import City
         from models.state import State
         from models.base_model import Base
+        from models.user import User
         from sqlalchemy.orm import sessionmaker, scoped_session
 
         session_factory = sessionmaker(bind=self.__engine)

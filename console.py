@@ -232,7 +232,6 @@ class HBNBCommand(cmd.Cmd):
         storage_name = type(storage).__name__
         strg = HBNBCommand.classes[storage_name]
         instance = strg()
-        print(instance)
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
