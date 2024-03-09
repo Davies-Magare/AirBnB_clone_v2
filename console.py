@@ -10,7 +10,8 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -21,7 +22,8 @@ class HBNBCommand(cmd.Cmd):
     classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
+               'Review': Review, 'DBStorage': DBStorage,
+               'FileStorage': FileStorage
               }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
@@ -227,17 +229,20 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
+        storage_name = type(storage).__name__
+        strg = HBNBCommand.classes[storage_name]
+        instance = strg()
+        print(instance)
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in instance.all().items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in instance.all().items():
                 print_list.append(str(v))
 
         print(print_list)
