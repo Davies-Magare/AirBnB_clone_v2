@@ -6,6 +6,7 @@ Compress webstatic directory into a tar file with Fabric.
 """
 
 def do_pack():
+    """Compress a webstatic directory into a tar file with Fabric."""
     try:
         local('mkdir -p versions 2>/dev/null')
         time = datetime.now()
