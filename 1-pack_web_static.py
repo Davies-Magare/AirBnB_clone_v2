@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 from fabric.api import *
 from datetime import datetime
-"""Compress webstatic directory into a tar file with Fabric."""
+"""
+Compress webstatic directory into a tar file with Fabric.
+"""
 
 def do_pack():
     try:
