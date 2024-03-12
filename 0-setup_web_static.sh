@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #install nginx
 apt-get install nginx -y
-service nginx start
+sudo service nginx start
 #make directories and test file
 mkdir /data/ 2>/dev/null
 mkdir -p /data/web_static/ 2>/dev/null
@@ -33,4 +33,4 @@ echo "server {
   }
 }" > /etc/nginx/sites-enabled/default
 
-service nginx restart
+sudo service nginx restart
