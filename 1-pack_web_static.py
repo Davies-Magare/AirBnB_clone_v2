@@ -13,7 +13,7 @@ def do_pack():
         time = datetime.now()
         timestamp = time.strftime("%Y%m%d%H%M%S")
         path = "versions/web_static_{}.tgz".format(timestamp)
-        local('tar -czvf {} web_static'.format(path))
+        local('tar -czvf {} -C web_static .'.format(path))
         return path
     except Exception:
         return None
