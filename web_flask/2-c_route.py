@@ -21,7 +21,7 @@ def hello_hbnb_2():
 def what_is_c(text):
     """Define route for /c/<text"""
     if '_' in text:
-        text.replace('_', ' ')
+        text = text.replace('_', ' ')
     return "C {}".format(text)
 
 
