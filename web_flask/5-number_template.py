@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Hello hbnb route and view function"""
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.config['strict_slashes'] = False
 
