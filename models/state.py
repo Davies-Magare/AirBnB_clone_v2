@@ -13,6 +13,7 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
+        """Print state cities."""
         from models import storage
         obj_list = []
         for value in storage.all(City).values():
