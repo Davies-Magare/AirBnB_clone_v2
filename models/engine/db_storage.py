@@ -75,7 +75,10 @@ class DBStorage:
         from sqlalchemy.orm import sessionmaker, scoped_session
 
         session_factory = sessionmaker(bind=self.__engine)
-        Session = scoped_session(session_factory)
-        self.__session = Session()
+        self.Session = scoped_session(session_factory)
+        self.__session = self.Session()
 
         Base.metadata.create_all(bind=self.__engine)
+    def close(self):
+        self.Session.close()
+

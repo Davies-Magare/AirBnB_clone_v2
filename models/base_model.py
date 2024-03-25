@@ -33,7 +33,6 @@ class BaseModel:
                 del kwargs['_sa_instance_state']
             self.__dict__.update(kwargs)
 
-
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
@@ -52,6 +51,8 @@ class BaseModel:
         for key, value in self.__dict__.items():
             if key != '_sa_instance_state':
                 dictionary[key] = value
+        if hasattr(self, '_sa_instance_state'):
+            delattr(self, '_sa_instance_state')
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
