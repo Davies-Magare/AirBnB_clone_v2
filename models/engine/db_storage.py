@@ -80,5 +80,6 @@ class DBStorage:
 
         Base.metadata.create_all(bind=self.__engine)
     def close(self):
+        """Destroy the session"""
         self.Session.close()
 
