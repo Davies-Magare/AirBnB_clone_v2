@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Distribute archive to remote web servers."""
 
-
 from fabric.api import env, put, run
 import os
 
@@ -22,8 +21,8 @@ def do_deploy(archive_path):
         # Decompress file
         filename = os.path.basename(archive_path)
         filename_no_extension = filename.split('.')[0]
-        decompress_path = '/data/web_static/releases/{}'
-        .format(filename_no_extension)
+        decompress_path = '/data/web_static/releases/{}'.format(
+                           filename_no_extension)
         run('mkdir -p {}'.format(decompress_path))
         upload_path = '/tmp/{}'.format(filename)
         run('tar -xzvf {} -C {}'.format(upload_path, decompress_path))
