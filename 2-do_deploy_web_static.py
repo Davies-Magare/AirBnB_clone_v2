@@ -9,6 +9,7 @@ env.user = 'ubuntu'
 env.key_filename = "/home/vagrant/.ssh/school"
 env.hosts = ['34.224.62.243', '54.90.55.235']  # Define multiple hosts
 
+
 def do_deploy(archive_path):
     """Distribute an archive to remote webservers."""
     if not os.path.exists(archive_path):
@@ -21,7 +22,8 @@ def do_deploy(archive_path):
         # Decompress file
         filename = os.path.basename(archive_path)
         filename_no_extension = filename.split('.')[0]
-        decompress_path = '/data/web_static/releases/{}'.format(filename_no_extension)
+        decompress_path = '/data/web_static/releases/{}'
+        .format(filename_no_extension)
         run('mkdir -p {}'.format(decompress_path))
         upload_path = '/tmp/{}'.format(filename)
         run('tar -xzvf {} -C {}'.format(upload_path, decompress_path))
@@ -35,4 +37,3 @@ def do_deploy(archive_path):
     except Exception as e:
         print("Error occurred:", e)
         return False
-
