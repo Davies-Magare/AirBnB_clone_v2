@@ -7,7 +7,7 @@ from datetime import datetime
 def do_pack():
     """Create a tar archive using fabric."""
     try:
-        local('mkdir versions')
+        local('mkdir -p versions')
         now = datetime.now()
         time_string = now.strftime("%Y%m%d%H%M%S")
         archive_name = "web_static_{}.tgz".format(time_string)
