@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""Distribute archive to remote web servers."""
+
+
 from fabric.api import env, put, run
 import os
 
