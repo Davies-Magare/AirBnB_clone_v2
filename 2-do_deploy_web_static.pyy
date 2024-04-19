@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+"""Deploy archive to webservers"""
+
+
+import os
+from fabric.api import *
+
+def do_deploy(archive_path):
+    """Distribute an archive to remote webservers."""
+    if not os.path.exists(archive_path):
+        return False
+    env.user = 'ubuntu'
+    env.hosts = ['34.224.62.243', '54.90.55.235']
+    env.key_filename = "/home/vagrant/.ssh/school"
+    
+    #deploy files for each host
+    try:
+        #upload file to webserver
+        put(archive_path, '/tmp/')
+        #decompress file
+        filename = os.path.basename(archive_path)
+        filename_no_extension = filename.split('.')[0]
+        decompress_path = '/data/web_static/releases/{}'.format(filename_no_extension)
+        upload_path = '/tmp/{}'.format(filename)
+        run('tar -xzvf {} -C {}'.format(upload_path, decompress_path))
+        #delete archive from web server
+        run('rm -f {}'.format(upload_path))
+        #delete symlink
+        run('rm /data/web_static/current')
+        #create new symlink
+        run('ln -s {} /data/web_static/current'.format(decompress_path))
+        return True
+    except Exception:
+        return False
+

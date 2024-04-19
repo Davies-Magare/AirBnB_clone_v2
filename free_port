@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+run_pid=$(lsof -ti:5000)
+if [ -n "$run_pid" ]; then
+	kill -9 "$run_pid"
+	echo "OK"
+else
+	echo "Failed"
+fi
